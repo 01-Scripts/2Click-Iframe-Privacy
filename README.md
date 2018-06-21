@@ -1,5 +1,6 @@
 # 2Click-Iframe-Privacy
 Easy way to implement a 2-click solution for every IFrame embedded content (like Youtube videos, Google maps, Google calendar and more) using vanilla JavaScript.
+[Demo](https://01-scripts.github.io/2Click-Iframe-Privacy/)
 
 ## Setup
 
