@@ -1,8 +1,8 @@
 /*!
- * 2Click-Iframe-Privacy v0.1.0
+ * 2Click-Iframe-Privacy v0.1.1
  * https://github.com/01-Scripts/2Click-Iframe-Privacy
  * 
- * Licensed MIT © 2018 Michael Lorer - https://www.01-scripts.de/
+ * Licensed MIT © 2018-2019 Michael Lorer - https://www.01-scripts.de/
  */
 
  var _2ClickIframePrivacy = new function() {
