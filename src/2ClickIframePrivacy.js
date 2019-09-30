@@ -44,7 +44,7 @@
         wrapper.className = 'privacy-msg '+selclass+'-msg';
         wrapper.style.width = el.clientWidth+'px';
         wrapper.style.height = el.clientHeight+'px';
-        wrapper.innerHTML = '<p>'+ text +'<a href="#foo" onclick="_2ClickIframePrivacy.EnableContent(\''+ type +'\', \''+ selclass +'\');">Inhalt anzeigen</a></p>';
+        wrapper.innerHTML = '<p>'+ text +'<a href="#foo" onclick="_2ClickIframePrivacy.EnableContent(\''+ type +'\', \''+ selclass +'\'); return false;">Inhalt anzeigen</a></p>';
         wrapper.appendChild(el);
     }
 
