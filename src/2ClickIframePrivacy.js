@@ -8,7 +8,8 @@
  var _2ClickIframePrivacy = new function() {
 
     var config = {
-        noCookies: false
+        noCookies: false,
+        useSessionCookie: true
     };
     this.types = new Array(
         {
@@ -34,6 +35,10 @@
         document.cookie = name + "=" + value + ";path=/;expires=" + d.toGMTString();
     }
 
+    function setSessionCookie(name, value) {
+        document.cookie = name + "=" + value + ";path=/";
+    }
+
     function getCookie(name) {
         var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
         return v ? v[2] : null;
@@ -50,7 +55,12 @@
 
     this.EnableContent = function (type, selclass){
         if(!config.noCookies){
-            setCookie('_2ClickIPEnable-'+type, '1', 1);
+            if(config.useSessionCookie){
+                setSessionCookie('_2ClickIPEnable-'+type, '1');
+            }
+            else{
+                setCookie('_2ClickIPEnable-'+type, '1', 30);
+            }
         }
 
         var x = document.querySelectorAll('div.'+selclass+'-msg p');
@@ -80,6 +90,9 @@
         // Read UserConfiguration:
         if (typeof Userconfig.noCookies !== 'undefined') {
             config.noCookies = Userconfig.noCookies;
+        }
+        if (typeof Userconfig.useSessionCookie !== 'undefined') {
+            config.useSessionCookie = Userconfig.useSessionCookie;
         }
 
         if (Array.isArray(Userconfig.CustomTypes)) {

@@ -77,7 +77,8 @@ Until then please have a look at the following code:
 ```html
 <script type="text/javascript">
 var _2ClickIframePrivacyConfig = {
-    noCookies: true,
+    noCookies: false,
+    useSessionCookie: true,
     CustomTypes: Array(
         {
             type: 'ownvideo', 
