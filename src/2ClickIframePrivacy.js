@@ -50,7 +50,9 @@
         wrapper.style.width = el.clientWidth+'px';
         wrapper.style.height = el.clientHeight+'px';
         wrapper.innerHTML = text +'<a href="#foo" onclick="_2ClickIframePrivacy.EnableContent(\''+ type +'\', \''+ selclass +'\'); return false;">Inhalt anzeigen</a>';
-        wrapper.innerHTML = wrapper.innerHTML + '<br /><input type="checkbox" name="remind-\''+ selclass +'\'" /> <label>Auswahl merken</label>';
+        if(!config.noCookies){
+            wrapper.innerHTML = wrapper.innerHTML + '<br /><input type="checkbox" name="remind-\''+ selclass +'\'" /> <label>Auswahl merken</label>';
+        }
         wrapper.innerHTML = '<p>' + wrapper.innerHTML + '</p>';
         wrapper.appendChild(el);
     }
