@@ -72,7 +72,7 @@
 
         x = document.getElementsByClassName(selclass);
         for (i = 0; i < x.length; i++) {
-            x[i].src = x[i].title;
+            x[i].src = x[i].getAttribute("data-src");
         }
     }
 
@@ -95,7 +95,7 @@
                 }
             }else{
                 for (x = 0; x < selector.length; x++) {
-                    selector[x].src = selector[x].title;
+                    selector[x].src = selector[x].getAttribute("data-src");
                 }
             }
         }
