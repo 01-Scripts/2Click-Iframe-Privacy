@@ -77,7 +77,7 @@ Until then please have a look at the following code:
 ```html
 <script type="text/javascript">
 var _2ClickIframePrivacyConfig = {
-    noCookies: false,
+    enableCookies: true,
     useSessionCookie: true,
     CustomTypes: Array(
         {

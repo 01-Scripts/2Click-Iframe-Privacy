@@ -8,7 +8,7 @@
  var _2ClickIframePrivacy = new function() {
 
     var config = {
-        noCookies: false,
+        enableCookies: true,
         useSessionCookie: true
     };
     this.types = new Array(
@@ -50,7 +50,7 @@
         wrapper.style.width = el.clientWidth+'px';
         wrapper.style.height = el.clientHeight+'px';
         wrapper.innerHTML = text +'<a href="#foo" onclick="_2ClickIframePrivacy.EnableContent(\''+ type +'\', \''+ selclass +'\'); return false;">Inhalt anzeigen</a>';
-        if(!config.noCookies){
+        if(config.enableCookies){
             wrapper.innerHTML = wrapper.innerHTML + '<br /><input type="checkbox" name="remind-\''+ selclass +'\'" /> <label>Auswahl merken</label>';
         }
         wrapper.innerHTML = '<p>' + wrapper.innerHTML + '</p>';
@@ -61,7 +61,7 @@
         var i;
 
         // Cookies globally enabled by config?
-        if(!config.noCookies){
+        if(config.enableCookies){
             var remind = false;
             var x = document.querySelectorAll('div.'+selclass+'-msg p input');
             // Check if any checkbox for the selected class was checked. If so a cookie will be set
@@ -105,8 +105,8 @@
 
     this.init = function (Userconfig) {
         // Read UserConfiguration:
-        if (typeof Userconfig.noCookies !== 'undefined') {
-            config.noCookies = Userconfig.noCookies;
+        if (typeof Userconfig.enableCookies !== 'undefined') {
+            config.enableCookies = Userconfig.enableCookies;
         }
         if (typeof Userconfig.useSessionCookie !== 'undefined') {
             config.useSessionCookie = Userconfig.useSessionCookie;
