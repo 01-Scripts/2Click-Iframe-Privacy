@@ -1,5 +1,5 @@
 /*!
- * 2Click-Iframe-Privacy v0.1.1
+ * 2Click-Iframe-Privacy v0.2.0
  * https://github.com/01-Scripts/2Click-Iframe-Privacy
  * 
  * Licensed MIT © 2018-2019 Michael Lorer - https://www.01-scripts.de/
@@ -8,7 +8,8 @@
  var _2ClickIframePrivacy = new function() {
 
     var config = {
-        noCookies: false
+        enableCookies: true,
+        useSessionCookie: true
     };
     this.types = new Array(
         {
@@ -34,6 +35,10 @@
         document.cookie = name + "=" + value + ";path=/;expires=" + d.toGMTString();
     }
 
+    function setSessionCookie(name, value) {
+        document.cookie = name + "=" + value + ";path=/";
+    }
+
     function getCookie(name) {
         var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
         return v ? v[2] : null;
@@ -44,17 +49,39 @@
         wrapper.className = 'privacy-msg '+selclass+'-msg';
         wrapper.style.width = el.clientWidth+'px';
         wrapper.style.height = el.clientHeight+'px';
-        wrapper.innerHTML = '<p>'+ text +'<a href="#foo" onclick="_2ClickIframePrivacy.EnableContent(\''+ type +'\', \''+ selclass +'\'); return false;">Inhalt anzeigen</a></p>';
+        wrapper.innerHTML = text +'<a href="#foo" onclick="_2ClickIframePrivacy.EnableContent(\''+ type +'\', \''+ selclass +'\'); return false;">Inhalt anzeigen</a>';
+        if(config.enableCookies){
+            wrapper.innerHTML = wrapper.innerHTML + '<br /><input type="checkbox" name="remind-\''+ selclass +'\'" /> <label>Auswahl merken</label>';
+        }
+        wrapper.innerHTML = '<p>' + wrapper.innerHTML + '</p>';
         wrapper.appendChild(el);
     }
 
     this.EnableContent = function (type, selclass){
-        if(!config.noCookies){
-            setCookie('_2ClickIPEnable-'+type, '1', 1);
+        var i;
+
+        // Cookies globally enabled by config?
+        if(config.enableCookies){
+            var remind = false;
+            var x = document.querySelectorAll('div.'+selclass+'-msg p input');
+            // Check if any checkbox for the selected class was checked. If so a cookie will be set
+            for (i = 0; i < x.length; i++) {
+                if(x[i].checked == true){
+                    remind = true;
+                }
+            }
+
+            if(remind){
+                if(config.useSessionCookie){
+                    setSessionCookie('_2ClickIPEnable-'+type, '1');
+                }
+                else{
+                    setCookie('_2ClickIPEnable-'+type, '1', 30);
+                }
+            }
         }
 
         var x = document.querySelectorAll('div.'+selclass+'-msg p');
-        var i;
         for (i = 0; i < x.length; i++) {
             x[i].parentNode.removeChild(x[i]);
         }
@@ -72,14 +99,17 @@
 
         x = document.getElementsByClassName(selclass);
         for (i = 0; i < x.length; i++) {
-            x[i].src = x[i].title;
+            x[i].src = x[i].getAttribute("data-src");
         }
     }
 
     this.init = function (Userconfig) {
         // Read UserConfiguration:
-        if (typeof Userconfig.noCookies !== 'undefined') {
-            config.noCookies = Userconfig.noCookies;
+        if (typeof Userconfig.enableCookies !== 'undefined') {
+            config.enableCookies = Userconfig.enableCookies;
+        }
+        if (typeof Userconfig.useSessionCookie !== 'undefined') {
+            config.useSessionCookie = Userconfig.useSessionCookie;
         }
 
         if (Array.isArray(Userconfig.CustomTypes)) {
@@ -95,7 +125,7 @@
                 }
             }else{
                 for (x = 0; x < selector.length; x++) {
-                    selector[x].src = selector[x].title;
+                    selector[x].src = selector[x].getAttribute("data-src");
                 }
             }
         }
