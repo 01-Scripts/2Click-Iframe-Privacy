@@ -50,7 +50,7 @@
         return v ? v[2] : null;
     }
 
-    function wrap(el, wrapper, type, selclass, text) {
+    function wrap(el, wrapper, type, selclass, text, callback = null) {
         el.parentNode.insertBefore(wrapper, el);
         wrapper.className = 'privacy-msg '+selclass+'-msg';
         wrapper.style.width = el.clientWidth+'px';
@@ -64,6 +64,9 @@
         }
         wrapper.innerHTML = '<p>' + wrapper.innerHTML + '</p>';
         wrapper.appendChild(el);
+        if(callback) {
+            callback();
+        }
     }
 
     this.EnableContent = function (type, selclass){
