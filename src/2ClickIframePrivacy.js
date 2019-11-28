@@ -50,7 +50,7 @@
         return v ? v[2] : null;
     }
 
-    function wrap(el, wrapper, type, selclass, text, callback = null) {
+    function wrap(el, wrapper, type, selclass, text) {
         el.parentNode.insertBefore(wrapper, el);
         wrapper.className = 'privacy-msg '+selclass+'-msg';
         wrapper.style.width = el.clientWidth+'px';
@@ -64,9 +64,6 @@
         }
         wrapper.innerHTML = '<p>' + wrapper.innerHTML + '</p>';
         wrapper.appendChild(el);
-        if(callback) {
-            callback();
-        }
     }
 
     this.EnableContent = function (type, selclass){
@@ -112,6 +109,12 @@
         x = document.getElementsByClassName(selclass);
         for (i = 0; i < x.length; i++) {
             x[i].src = x[i].getAttribute("data-src");
+        }
+
+        for (i = 0; i < this.types.length; i++) {
+            if(this.types[i].type == type && this.types[i].callback) {
+                window[this.types[i].callback]();
+            }
         }
     }
 
