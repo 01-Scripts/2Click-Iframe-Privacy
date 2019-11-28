@@ -10,7 +10,11 @@
     var config = {
         enableCookies: true,
         useSessionCookie: true,
-        cookieNamespace: '_2ClickIPEnable-'
+        cookieNamespace: '_2ClickIPEnable-',
+        showContentLabel: 'Inhalt anzeigen',
+        rememberChoiceLabel: 'Auswahl merken',
+        privacyPolicyLabel: 'Datenschutzerklärung',
+        privacyPolicyUrl: false
     };
     
     this.types = new Array(
@@ -51,9 +55,12 @@
         wrapper.className = 'privacy-msg '+selclass+'-msg';
         wrapper.style.width = el.clientWidth+'px';
         wrapper.style.height = el.clientHeight+'px';
-        wrapper.innerHTML = text +'<a href="#foo" onclick="_2ClickIframePrivacy.EnableContent(\''+ type +'\', \''+ selclass +'\'); return false;">Inhalt anzeigen</a>';
+        wrapper.innerHTML = text +'<a href="#foo" onclick="_2ClickIframePrivacy.EnableContent(\''+ type +'\', \''+ selclass +'\'); return false;">'+config.showContentLabel+'</a>';
         if(config.enableCookies){
-            wrapper.innerHTML = wrapper.innerHTML + '<br /><input type="checkbox" name="remind-\''+ selclass +'\'" /> <label>Auswahl merken</label>';
+            wrapper.innerHTML = wrapper.innerHTML + '<br /><input type="checkbox" name="remind-\''+ selclass +'\'" /> <label>'+config.rememberChoiceLabel+'</label>';
+        }
+        if(config.privacyPolicyUrl){
+            wrapper.innerHTML = wrapper.innerHTML + '<br /><a href="'+config.privacyPolicyUrl+'">'+config.privacyPolicyLabel+'</a>';
         }
         wrapper.innerHTML = '<p>' + wrapper.innerHTML + '</p>';
         wrapper.appendChild(el);
@@ -116,7 +123,18 @@
         if (typeof Userconfig.cookieNamespace !== 'undefined') {
             config.cookieNamespace = Userconfig.cookieNamespace;
         }
-
+        if (typeof Userconfig.privacyPolicyUrl !== 'undefined') {
+            config.privacyPolicyUrl = Userconfig.privacyPolicyUrl;
+        }
+        if (typeof Userconfig.showContentLabel !== 'undefined') {
+            config.showContentLabel = Userconfig.showContentLabel;
+        }
+        if (typeof Userconfig.rememberChoiceLabel !== 'undefined') {
+            config.rememberChoiceLabel = Userconfig.rememberChoiceLabel;
+        }
+        if (typeof Userconfig.privacyPolicyLabel !== 'undefined') {
+            config.privacyPolicyLabel = Userconfig.privacyPolicyLabel;
+        }
 
         if (Array.isArray(Userconfig.CustomTypes)) {
             this.types = Userconfig.CustomTypes;
