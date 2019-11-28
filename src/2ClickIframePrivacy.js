@@ -19,18 +19,15 @@
     
     this.types = new Array(
         {
-            type: 'video', 
-            class: 'privacy-video', 
+            type: 'video',
             description: 'Zum Aktivieren des Videos bitte auf den Link klicken. Durch das Aktivieren von eingebetteten Videos werden Daten an den jeweiligen Anbieter übermittelt. Weitere Informationen können unserer Datenschutzerklärung entnommen werden.<br />'
         },
         {
-            type: 'map', 
-            class: 'privacy-map', 
+            type: 'map',
             description: 'Zum Aktivieren der eingebetteten Karte bitte auf den Link klicken. Durch das Aktivieren werden Daten an den jeweiligen Anbieter übermittelt. Weitere Informationen können unserer Datenschutzerklärung entnommen werden.<br />'
         },
         {
-            type: 'calendar', 
-            class: 'privacy-calendar', 
+            type: 'calendar',
             description: 'Zum Aktivieren des eingebetteten Kalenders bitte auf den Link klicken. Durch das Aktivieren werden Daten an den jeweiligen Anbieter übermittelt. Weitere Informationen können unserer Datenschutzerklärung entnommen werden.<br />'
         }
     );
@@ -50,14 +47,14 @@
         return v ? v[2] : null;
     }
 
-    function wrap(el, wrapper, type, selclass, text) {
+    function wrap(el, wrapper, type, text) {
         el.parentNode.insertBefore(wrapper, el);
-        wrapper.className = 'privacy-msg '+selclass+'-msg';
+        wrapper.className = 'privacy-msg '+type+'-msg';
         wrapper.style.width = el.clientWidth+'px';
         wrapper.style.height = el.clientHeight+'px';
-        wrapper.innerHTML = text +'<a href="#foo" onclick="_2ClickIframePrivacy.EnableContent(\''+ type +'\', \''+ selclass +'\'); return false;">'+config.showContentLabel+'</a>';
+        wrapper.innerHTML = text +'<a href="#foo" onclick="_2ClickIframePrivacy.EnableContent(\''+ type +'\'); return false;">'+config.showContentLabel+'</a>';
         if(config.enableCookies){
-            wrapper.innerHTML = wrapper.innerHTML + '<br /><input type="checkbox" name="remind-\''+ selclass +'\'" /> <label>'+config.rememberChoiceLabel+'</label>';
+            wrapper.innerHTML = wrapper.innerHTML + '<br /><input type="checkbox" name="remind-\''+ type +'\'" /> <label>'+config.rememberChoiceLabel+'</label>';
         }
         if(config.privacyPolicyUrl){
             wrapper.innerHTML = wrapper.innerHTML + '<br /><a href="'+config.privacyPolicyUrl+'">'+config.privacyPolicyLabel+'</a>';
@@ -66,13 +63,13 @@
         wrapper.appendChild(el);
     }
 
-    this.EnableContent = function (type, selclass){
+    this.EnableContent = function (type){
         var i;
 
         // Cookies globally enabled by config?
         if(config.enableCookies){
             var remind = false;
-            var x = document.querySelectorAll('div.'+selclass+'-msg p input');
+            var x = document.querySelectorAll('div.'+type+'-msg p input');
             // Check if any checkbox for the selected class was checked. If so a cookie will be set
             for (i = 0; i < x.length; i++) {
                 if(x[i].checked == true){
@@ -90,12 +87,12 @@
             }
         }
 
-        var x = document.querySelectorAll('div.'+selclass+'-msg p');
+        var x = document.querySelectorAll('div.'+type+'-msg p');
         for (i = 0; i < x.length; i++) {
             x[i].parentNode.removeChild(x[i]);
         }
 
-        x = document.querySelectorAll('div.'+selclass+'-msg');
+        x = document.querySelectorAll('div.'+type+'-msg');
         for (i = 0; i < x.length; i++) {
             var parent = x[i].parentNode;
 
@@ -106,7 +103,7 @@
             parent.removeChild(x[i]);
         }
 
-        x = document.getElementsByClassName(selclass);
+        x = document.querySelectorAll('iframe[data-2click-type="'+type+'"]');
         for (i = 0; i < x.length; i++) {
             x[i].src = x[i].getAttribute("data-src");
         }
@@ -141,11 +138,12 @@
         }
 
         for (i = 0; i < this.types.length; i++) {
-            var selector = document.getElementsByClassName(this.types[i].class);
+            var selector = document.querySelectorAll('iframe[data-2click-type="'+this.types[i].type+'"]');
+
             var x;
             if(!getCookie(config.cookieNamespace+this.types[i].type)){
                 for (x = 0; x < selector.length; x++) {
-                    wrap(selector[x], document.createElement('div'), this.types[i].type, this.types[i].class, this.types[i].description);
+                    wrap(selector[x], document.createElement('div'), this.types[i].type, this.types[i].description);
                 }
             }else{
                 for (x = 0; x < selector.length; x++) {
