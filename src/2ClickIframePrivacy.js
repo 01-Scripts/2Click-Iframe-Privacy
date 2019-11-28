@@ -9,8 +9,10 @@
 
     var config = {
         enableCookies: true,
-        useSessionCookie: true
+        useSessionCookie: true,
+        cookieNamespace: '_2ClickIPEnable-'
     };
+    
     this.types = new Array(
         {
             type: 'video', 
@@ -73,10 +75,10 @@
 
             if(remind){
                 if(config.useSessionCookie){
-                    setSessionCookie('_2ClickIPEnable-'+type, '1');
+                    setSessionCookie(config.cookieNamespace+type, '1');
                 }
                 else{
-                    setCookie('_2ClickIPEnable-'+type, '1', 30);
+                    setCookie(config.cookieNamespace+type, '1', 30);
                 }
             }
         }
@@ -111,6 +113,10 @@
         if (typeof Userconfig.useSessionCookie !== 'undefined') {
             config.useSessionCookie = Userconfig.useSessionCookie;
         }
+        if (typeof Userconfig.cookieNamespace !== 'undefined') {
+            config.cookieNamespace = Userconfig.cookieNamespace;
+        }
+
 
         if (Array.isArray(Userconfig.CustomTypes)) {
             this.types = Userconfig.CustomTypes;
@@ -119,7 +125,7 @@
         for (i = 0; i < this.types.length; i++) {
             var selector = document.getElementsByClassName(this.types[i].class);
             var x;
-            if(!getCookie('_2ClickIPEnable-'+this.types[i].type)){
+            if(!getCookie(config.cookieNamespace+this.types[i].type)){
                 for (x = 0; x < selector.length; x++) {
                     wrap(selector[x], document.createElement('div'), this.types[i].type, this.types[i].class, this.types[i].description);
                 }
