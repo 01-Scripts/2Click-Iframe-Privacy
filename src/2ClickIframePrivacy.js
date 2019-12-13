@@ -107,6 +107,12 @@
         for (i = 0; i < x.length; i++) {
             x[i].src = x[i].getAttribute("data-src");
         }
+
+        for (i = 0; i < this.types.length; i++) {
+            if(this.types[i].type == type && this.types[i].callback) {
+                window[this.types[i].callback]();
+            }
+        }
     }
 
     this.init = function (Userconfig) {

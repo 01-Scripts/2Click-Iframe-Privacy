@@ -76,13 +76,19 @@ Until then please have a look at the following code:
 
 ```html
 <script type="text/javascript">
+
+function ownvideo_callback() {
+    // alert("Callback ausgeführt");
+}
+
 var _2ClickIframePrivacyConfig = {
     enableCookies: true,
     useSessionCookie: true,
     CustomTypes: Array(
         {
-            type: 'ownvideo', 
-            class: 'privacy-ownvideo', 
+            type: 'ownvideo',
+            class: 'privacy-ownvideo',
+            callback: 'ownvideo_callback',
             description: 'Please enter a text to show before loading the content<br />'
         }
     )
