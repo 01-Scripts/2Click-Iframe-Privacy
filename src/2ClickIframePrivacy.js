@@ -47,9 +47,10 @@
         return v ? v[2] : null;
     }
 
+    // Create <div>-element within the respective iframe to display the defined data-security message and get consent for loading the iframe content.
     function wrap(el, wrapper, type, text) {
         el.parentNode.insertBefore(wrapper, el);
-        wrapper.className = 'privacy-msg '+type+'-msg';
+        wrapper.className = 'privacy-msg privacy-'+type+'-msg';
         wrapper.style.width = el.clientWidth+'px';
         wrapper.style.height = el.clientHeight+'px';
         wrapper.innerHTML = text +'<a href="#foo" onclick="_2ClickIframePrivacy.EnableContent(\''+ type +'\'); return false;">'+config.showContentLabel+'</a>';
@@ -69,7 +70,7 @@
         // Cookies globally enabled by config?
         if(config.enableCookies){
             var remind = false;
-            var x = document.querySelectorAll('div.'+type+'-msg p input');
+            var x = document.querySelectorAll('div.privacy-'+type+'-msg p input');
             // Check if any checkbox for the selected class was checked. If so a cookie will be set
             for (i = 0; i < x.length; i++) {
                 if(x[i].checked == true){
@@ -87,12 +88,12 @@
             }
         }
 
-        var x = document.querySelectorAll('div.'+type+'-msg p');
+        var x = document.querySelectorAll('div.privacy-'+type+'-msg p');
         for (i = 0; i < x.length; i++) {
             x[i].parentNode.removeChild(x[i]);
         }
 
-        x = document.querySelectorAll('div.'+type+'-msg');
+        x = document.querySelectorAll('div.privacy-'+type+'-msg');
         for (i = 0; i < x.length; i++) {
             var parent = x[i].parentNode;
 
@@ -108,6 +109,7 @@
             x[i].src = x[i].getAttribute("data-src");
         }
 
+        // If available, execute the callback that is defined for the currently active type
         for (i = 0; i < this.types.length; i++) {
             if(this.types[i].type == type && this.types[i].callback) {
                 window[this.types[i].callback]();
