@@ -1,16 +1,18 @@
 # 2Click-Iframe-Privacy
-Einfache 2-Klick Lösung für jeden per IFrame eingebetteten Inhalt (Youtube-Videos, Google Maps, Google Kalender etc.). Implementiert in purem JavaScript ohne Abhängigkeiten.
+Einfaches JavaScript, um eine 2-Klick-Lösung für beliebige per IFrame eingebettete Inhalte zu aktivieren (z.B. Youtube, Google-Maps, Google Kalender etc.) - Kein Framework nötig!
 [Demo](https://01-scripts.github.io/2Click-Iframe-Privacy/)
+
+___
 
 ## Setup
 
-Fügen Sie das JavaScript aus dem `dist` Verzeichnis in ihre Webseite ein.
+JavaScript aus dem `dist` Verzeichnis in die Webseite einfügen.
 
 ```html
 <script src="dist/2ClickIframePrivacy.min.js"></script>
 ```
 
-Fügen Sie die folgende CSS-Klasse in eine existierende CSS-Datei ein oder fügen Sie den Code direkt in ihre Webseite ein:
+Folgende CSS-Klasse in eine existierende CSS-Datei einfügen oder den Code direkt in die Webseite kopieren:
 
 ```html
 <style type="text/css">
@@ -31,7 +33,7 @@ div.privacy-msg p {
 </style>
 ```
 
-Now, you need to instantiate it:
+Abschließend muss die Funktion initialisiert werden:
 
 ```html
 <script type="text/javascript">
@@ -39,27 +41,27 @@ document.addEventListener('DOMContentLoaded', _2ClickIframePrivacy.init(''));
 </script>
 ```
 
-# Usage
+# Benutzen
 
-## For Videos
+## Für Videos
 
-Replace `src=` with `data-src=` and add an empty attribute `src=""`, add the attribute `data-2click-type="video"` to the IFrame:
+`src=` mit `data-src=` ersetzen und ein leeres Attribut `src=""` hinzufügen; `data-2click-type="video"` als weiteres Attribut dem IFrame hinzufügen:
 
 ```html
 <iframe width="560" height="315" src="" data-src="https://www.youtube-nocookie.com/embed/oHg5SJYRHA0" data-2click-type="video" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 ```
 
-## For Google Maps
+## Für Google Maps
 
-Replace `src=` with `data-src=` and add an empty attribute `src=""`, add the attribute `data-2click-type="map"` to the IFrame:
+`src=` mit `data-src=` ersetzen und ein leeres Attribut `src=""` hinzufügen; `data-2click-type="map"` als weiteres Attribut dem IFrame hinzufügen:
 
 ```html
 <iframe src="" data-2click-type="map" data-src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2684819.3977904147!2d11.4079934!3d48.91741285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sde!2sde!4v1526416354209" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
 ```
 
-## For Google Calendar
+## Für Google Kalender
 
-Replace `src=` with `data-src=` and add an empty attribute `src=""`, add the attribute `data-2click-type="calendar"` to the IFrame:
+`src=` mit `data-src=` ersetzen und ein leeres Attribut `src=""` hinzufügen; `data-2click-type="calendar"` als weiteres Attribut dem IFrame hinzufügen:
 
 ```html
 <iframe src="" data-src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=r0i0in591m4os0150vjhohmjj8%40group.calendar.google.com&amp;color=%235229A3&amp;ctz=Europe%2FBerlin" data-2click-type="calendar" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
@@ -67,11 +69,11 @@ Replace `src=` with `data-src=` and add an empty attribute `src=""`, add the att
 
 # Demo
 
-Have a [look here](https://01-scripts.github.io/2Click-Iframe-Privacy/demo.html).
+[Demo hier ausprobieren](https://01-scripts.github.io/2Click-Iframe-Privacy/demo.html)
 
-# More options
+# Weitere Optionen
 
-The following code shows all available options described in detail below:
+Der nachfolgende Code zeigt alle verfügbaren Optionen zur einfachen Anpassung des Scritps:
 
 ```html
 <script type="text/javascript">
@@ -96,30 +98,30 @@ document.addEventListener('DOMContentLoaded', _2ClickIframePrivacy.init(_2ClickI
 </script>
 ```
 
-## Options
+## Optionen
 
-| Config-Variable         | Description | Default |
-|-------------------------|-------------|---------|
-| `enableCookies` | Set to `false` will disable the usage of cookies. Loading of embedded content must be accepted at each page load.  | `true` |
-| `useSessionCookie` | Change this setting to `false` to use a persistent cookie instead of a session cookie. Session cookies are cleared when the browser is closed.  | `true` |
-| `cookieNamespace` | Define a name for the namespace in which cookies should be created. | `_2ClickIPEnable-` |
-| `showContentLabel` | Change the naming of the link that is shown to enable and load the embedded content. | `Inhalt anzeigen` |
-| `rememberChoiceLabel` | Change the naming of the checkbox that is shown to remember the user-choice (by setting a cookie). | `Auswahl merken` |
-| `privacyPolicyLabel` | Change the naming of the link to your privacy statement. | `Datenschutzerklärung` |
-| `privacyPolicyUrl` | Define a link to the privacy statement of your web page. Link is only shown if a URL is provided. | `false` |
-| `CustomTypes` | See detailed description of options below. |  |
+| Konfigurationsvariable  | Beschreibung | Standard |
+|-------------------------|--------------|----------|
+| `enableCookies` | Auf `false` setzen um die Nutzung von Cookies abzuschalten. Das Nachladen von eingebettetem Inhalt muss dann auf jeder Seite erneut bestätigt werden.  | `true` |
+| `useSessionCookie` | Einstellung auf `false` um dauerhafte Cookies statt Session-Cookies zu verwernden. Session-Cookies werden beim Schließen des Browsers gelöscht.  | `true` |
+| `cookieNamespace` | Definition eines eigenen Namenbereichs zum Anlegen der Cookies | `_2ClickIPEnable-` |
+| `showContentLabel` | Bezeichnung des Links der angezeigt wird um den eingebetteten Inhalt nachzuladen. | `Inhalt anzeigen` |
+| `rememberChoiceLabel` | Bezeichnung der Checkbox um die Besucher-Auswahl zu merken (es wird dazu ein Cookie gesetzt). | `Auswahl merken` |
+| `privacyPolicyLabel` | Bezeichnung des Links der zu einer eigenen Datenschutzerklärung führt. | `Datenschutzerklärung` |
+| `privacyPolicyUrl` | Link zu einer eigenen Datenschutzerklärung. Wird nur angezeigt, wenn eine URL angegeben wird. | `false` |
+| `CustomTypes` | Details zur Nutzung wie nachfolgend beschrieben. |  |
 
-## Define custom types
+## Benutzerdefinierte Inhaltstypen definieren
 
-Besides the three pre-defined content types (`video`, `map`, `calendar`) it's also possible to define your own custom types and also define
-JavaScript callback-functions that are triggered each time a user is clicking on the `showContentLabel`-link.  
-You may define your own `CustomTypes` as shown in the code-snipped above and can use the following options within:
+Neben den drei Vordefinierten Inhaltstypen  (`video`, `map`, `calendar`) ist es auch möglich eigene, benutzerdefinierte Inhaltstypen zu definieren
+sowie JavaScript Callback-Funktionen zu erstellen, die immer dann ausgelöst werden, wenn ein Besucher den `showContentLabel`-Link anklickt.  
+Eigene Inhaltstypen können wie im obigen Code-Beispiel zu sehen definiert werden. Dazu können folgende Optionen genutzt werden:
 
-| Variable         | Description |
-|------------------|-------------|
-| `type` | Define a unique name for your custom content type. Use this type-name in the follwing attribute of each iframe: `data-2click-type="ownvideo"`. |
-| `callback` | Set the name of a valid JavaScript function. This function is called as a callback everytime a user clicks on the `showContentLabel`-link. |
-| `description` | Define a description (may contain HTML) that is shown in a `div` within the iframe of this type before loading the embedded content. |
+| Variable         | Beschreibung |
+|------------------|--------------|
+| `type` | Definiere einen eindeutigen Namen für den neu definierten Inhaltstypen. Dieser Name muss in folgendem Attribut für jedes entsprechende IFrame verwendet werden: `data-2click-type="ownvideo"`. |
+| `callback` | Name einer gültigen JavaScript-Function. Diese Funktion wird als Callback immer aufgerufen wenn ein Besucher auf den `showContentLabel`-Link klickt. |
+| `description` | Beschreibung (kann HTML enthalten) die in einem `div` innerhalb des IFrame angezeigt wird, bevor der eigentliche Inhalt nachgeladen wird. |
 
 ### Callback example
 
