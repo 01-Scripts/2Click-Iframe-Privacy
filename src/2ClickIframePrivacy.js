@@ -62,6 +62,8 @@
         }
         wrapper.innerHTML = '<p>' + wrapper.innerHTML + '</p>';
         wrapper.appendChild(el);
+        el.style.width = "0px"; 
+        el.style.height = "0px"
     }
 
     this.EnableContent = function (type){
@@ -107,6 +109,8 @@
         x = document.querySelectorAll('iframe[data-2click-type="'+type+'"]');
         for (i = 0; i < x.length; i++) {
             x[i].src = x[i].getAttribute("data-src");
+            x[i].style.width = x[i].getAttribute("width");
+            x[i].style.height = x[i].getAttribute("height");
         }
 
         // If available, execute the callback that is defined for the currently active type
