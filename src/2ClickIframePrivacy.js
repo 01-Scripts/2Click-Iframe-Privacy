@@ -1,8 +1,8 @@
 /*!
- * 2Click-Iframe-Privacy v0.3.0
+ * 2Click-Iframe-Privacy v0.3.1
  * https://github.com/01-Scripts/2Click-Iframe-Privacy
  * 
- * Licensed MIT © 2018-2019 Michael Lorer - https://www.01-scripts.de/
+ * Licensed MIT © 2018-2023 Michael Lorer - https://www.01-scripts.de/
  */
 
  var _2ClickIframePrivacy = new function() {
@@ -55,7 +55,7 @@
         wrapper.style.height = el.clientHeight+'px';
         wrapper.innerHTML = text +'<a href="#foo" onclick="_2ClickIframePrivacy.EnableContent(\''+ type +'\'); return false;">'+config.showContentLabel+'</a>';
         if(config.enableCookies){
-            wrapper.innerHTML = wrapper.innerHTML + '<br /><input type="checkbox" name="remind-\''+ type +'\'" /> <label>'+config.rememberChoiceLabel+'</label>';
+            wrapper.innerHTML = wrapper.innerHTML + '<br /><label><input type="checkbox" name="remind-\''+ type +'\'" /> '+config.rememberChoiceLabel+'</label>';
         }
         if(config.privacyPolicyUrl){
             wrapper.innerHTML = wrapper.innerHTML + '<br /><a href="'+config.privacyPolicyUrl+'">'+config.privacyPolicyLabel+'</a>';
