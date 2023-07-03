@@ -80,7 +80,7 @@ var _2ClickIframePrivacyConfig = {
     cookieNamespace: '_2ClickIPEnable-',
     showContentLabel: 'Inhalt anzeigen',
     rememberChoiceLabel: 'Auswahl merken',
-    privacyPolicyLabel: 'Datenschutzerkl‰rung',
+    privacyPolicyLabel: 'Datenschutzerkl√§rung',
     privacyPolicyUrl: false,
     CustomTypes: Array(
         {
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', _2ClickIframePrivacy.init(_2ClickI
 | `cookieNamespace` | Define a name for the namespace in which cookies should be created. | `_2ClickIPEnable-` |
 | `showContentLabel` | Change the naming of the link that is shown to enable and load the embedded content. | `Inhalt anzeigen` |
 | `rememberChoiceLabel` | Change the naming of the checkbox that is shown to remember the user-choice (by setting a cookie). | `Auswahl merken` |
-| `privacyPolicyLabel` | Change the naming of the link to your privacy statement. | `Datenschutzerkl‰rung` |
+| `privacyPolicyLabel` | Change the naming of the link to your privacy statement. | `Datenschutzerkl√§rung` |
 | `privacyPolicyUrl` | Define a link to the privacy statement of your web page. Link is only shown if a URL is provided. | `false` |
 | `CustomTypes` | See detailed description of options below. |  |
 
